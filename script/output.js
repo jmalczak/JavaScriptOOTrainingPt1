@@ -1,50 +1,34 @@
-var ConsoleOutput = function(){
-	var self = this;
-
-	self.clearBoard = function(){
-
-	};
-
-	self.drawBoard = function(cells){
-		self.clearBoard();
-
-		for(i = 0; i < cells.length; i++){
-			self.drawCell(cells[i]);
-		}
-	};
-
-	self.drawCell = function(cell){
-		console.log("x:" + cell.x + " y:" + cell.y);
-	};
-}
-
 var HtmlOutput = function(){
-	var self = this;
+    var self = this;
 
-	self.clearBoard = function(){
-		$("#board").html("<table class='board center'></table>");
-	};
+    self.showBoard = function(){
+        $("#board").show();
+    };
 
-	self.drawBoard = function(cells){
-		self.clearBoard();
+    self.clearBoard = function(){
+        $("#board").html("<table class='board center'></table>");
+    };
 
-		height = cells.length;
-		width = cells[0].length;
+    self.drawBoard = function(cells){
+        self.clearBoard();
 
-		for(x = 0; x < width; x++){
+        height = cells.length;
+        width = cells[0].length;
 
-			$("#board table").append("<tr x='" + x + "'></tr>")	
+        for(x = 0; x < width; x++){
 
-			for(y = 0; y < height; y++){
-				self.drawCell(cells[x][y])	
-			}
-		}	
-	};
+            $("#board table").append("<tr x='" + x + "'></tr>")    
 
-	self.drawCell = function(cell){ 
-		var style = cell.isSelected ? "selected" : "notSelected";
-		var selectedValue = cell.isSelected ? "X" : "";
+            for(y = 0; y < height; y++){
+                self.drawCell(cells[x][y])    
+            }
+        }    
+    };
 
-		$("#board table tr[X='" + cell.y + "']").append("<td class=" + style + " x='" + x + "' y='" + y + "' >" + selectedValue + "</td>");
-	};
+    self.drawCell = function(cell){ 
+        var style = cell.isSelected ? "selected" : "notSelected";
+        var selectedValue = cell.isSelected ? "X" : "";
+
+        $("#board table tr[X='" + cell.y + "']").append("<td class=" + style + " x='" + x + "' y='" + y + "' >" + selectedValue + "</td>");
+    };
 };

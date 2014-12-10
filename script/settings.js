@@ -1,6 +1,6 @@
 var Settings = function(boardSize, numberOfPlayers){
-	var self = this;
+    var self = this;
 
-	self.boardSize = boardSize;
-	self.numberOfPlayers = numberOfPlayers;
+    self.boardSize = boardSize;
+    self.numberOfPlayers = numberOfPlayers;
 }

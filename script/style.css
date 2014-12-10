@@ -2,15 +2,12 @@ body {
     margin: auto;
 }
 td {
-    border: 1px dotted black;
+    border: 1px dotted white;
     width: 120px;
     height: 120px;
 }
-#settings {
+#settings{
     width: 400px;
-    margin: auto;
-}
-.center {
     margin: auto;
 }
 .selected {
