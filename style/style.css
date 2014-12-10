@@ -6,10 +6,6 @@ td {
     width: 120px;
     height: 120px;
 }
-#settings {
-    width: 400px;
-    margin: auto;
-}
 .center {
     margin: auto;
 }
@@ -20,5 +16,10 @@ td {
     color: blue;
 }
 #board {
+    display: none;
+}
+#settings {
+    width: 400px;
+    margin: auto;
     display: none;
 }

@@ -8,8 +8,6 @@ var Engine = function(output, board, gameLogic){
     self.play = function(){
         console.log('Play');
 
-        output.showBoard();
-        
         board.init();
         self.move();
     }

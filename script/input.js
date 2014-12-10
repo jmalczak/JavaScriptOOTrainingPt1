@@ -1,21 +1,29 @@
-var Input = function(){
+var HtmlInput = function() {
     var self = this;
 
-    self.readInput = function(){
+    self.clearSettings = function(callback) {
+        $(document).ready(function() {
+            $("#clear").click(function(e) {
+                e.preventDefault();
+                callback();
+            });
+        });
+    };
 
-    };;
-};
+    self.startGame = function(callback) {
+        $(document).ready(function() {
+            $("#startGame").click(function(e){
+                e.preventDefault();
+                callback($("#boardSize").val(), $("#numberOfPlayers").val());
+            });
+        });
+    };
 
-var HtmlInput = function(){
-    var self = this;
-
-    self.readMove = function(onCompleted){
-
-        $("td").click(function(){
+    self.readMove = function(onCompleted) {
+        $("td").click(function() {
             var x = parseInt($(this).attr("x"));
             var y = parseInt($(this).attr("y"));
-            
-            if(x != undefined && y != undefined){
+            if (x != undefined && y != undefined) {
                 onCompleted(x, y);
             }
         })

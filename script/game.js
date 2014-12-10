@@ -2,50 +2,38 @@ var Game = new function(){
     var self = this;
 
     self.init = function(){
-        self.initEvents();
+        self.input = new HtmlInput();
+        self.output = new HtmlOutput();
+        self.output.showSettings();
 
-        self.readSettings(function(settings){
-            self.hideSettings();
-            self.createEngine(settings);
-            self.engine.play();
-        });
+        self.initEvents();
     };
 
     self.initEvents = function(){
-        $(document).ready(function(){
-            $("#clear").click(function(e){
-                e.preventDefault();
-
-                $("#numberOfPlayers").val("");
-                $("#boardSize").val("");
-            });
-        });
+        self.input.clearSettings(self.output.clearSettings);
+        self.input.startGame(self.startGame);
     };
 
     self.createEngine = function(settings){
         self.settings = settings;
-        self.output = new HtmlOutput();
-        self.input = new HtmlInput();
         self.board = new Board(self.settings, self.input, self.output);
         self.gameLogic = new GameLogic();
         self.engine = new Engine(self.output, self.board, self.gameLogic);
     };
 
-    self.readSettings = function(callback){
-        $("#startGame").click(function(e){
-            e.preventDefault();
+    self.startGame = function(boardSize, numberOfPlayers){
+        if(self.validateSettings(boardSize, numberOfPlayers)){
+            console.log(boardSize);
+            self.settings = new Settings(parseInt(boardSize), parseInt(numberOfPlayers));
 
-            if(self.validateSettings()){
-                callback(new Settings(parseInt($("#boardSize").val()), parseInt($("#numberOfPlayers").val())));
-            }
-        });
+            self.output.hideSettings();
+            self.output.showBoard();
+            self.createEngine(self.settings);
+            self.engine.play();
+        }
     };
 
-    self.validateSettings = function(){
-        return !isNaN(parseInt($("#numberOfPlayers").val())) && !isNaN(parseInt($("#boardSize").val()));
+    self.validateSettings = function(numberOfPlayers, boardSize){
+        return !isNaN(parseInt(numberOfPlayers)) && !isNaN(parseInt(boardSize));
     }
-
-    self.hideSettings = function(){
-        $("#settings").hide();
-    };
 }();
