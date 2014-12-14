@@ -10,7 +10,9 @@ td {
     margin: auto;
 }
 .selected {
-    color: red;
+    color:  black;
+    font-size: 100px;
+    text-align: center;
 }
 .notSelected {
     color: blue;

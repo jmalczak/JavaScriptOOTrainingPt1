@@ -2,16 +2,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="style/style.css" />
-        
-        <script src="script/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="script/game.js" type="text/javascript"></script>
-        <script src="script/engine.js" type="text/javascript"></script>
-        <script src="script/gameLogic.js" type="text/javascript"></script>
-        <script src="script/board.js" type="text/javascript"></script>
-        <script src="script/cell.js" type="text/javascript"></script>
-        <script src="script/settings.js" type="text/javascript"></script>
-        <script src="script/output.js" type="text/javascript"></script>
-        <script src="script/input.js" type="text/javascript"></script>
+        <script data-main="script/app.js" src="script/require.js" type="text/javascript"></script>
     </head>
     <body>
         <div class="container">
@@ -30,14 +21,11 @@
                             <label for="boardSize">Please provide board size:</label>
                             <input class="form-control" type="text" id="boardSize" />
                         </div>
-                        <button type="submit" id="clear" class="btn btn-default">Clear</button>
                         <button type="submit" id="startGame" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="clear" class="btn btn-default">Clear</button>                        
                     </form>
                 </div>
             </div>
         </div>
     </body>
-    <script type="text/javascript">
-        Game.init();
-    </script>
 </html>

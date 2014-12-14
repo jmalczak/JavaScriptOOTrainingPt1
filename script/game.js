@@ -1,39 +1,35 @@
-var Game = new function(){
-    var self = this;
+define(['input', 'output', 'settings', 'engine', 'board', 'gameLogic'], function(input, output, settings, engine, board, gameLogic) {
+    return function() {
+        var self = this;
 
-    self.init = function(){
-        self.input = new HtmlInput();
-        self.output = new HtmlOutput();
-        self.output.showSettings();
+        self.input = new input();
+        self.output = new output();
 
-        self.initEvents();
-    };
-
-    self.initEvents = function(){
-        self.input.clearSettings(self.output.clearSettings);
-        self.input.startGame(self.startGame);
-    };
-
-    self.createEngine = function(settings){
-        self.settings = settings;
-        self.board = new Board(self.settings, self.input, self.output);
-        self.gameLogic = new GameLogic();
-        self.engine = new Engine(self.output, self.board, self.gameLogic);
-    };
-
-    self.startGame = function(boardSize, numberOfPlayers){
-        if(self.validateSettings(boardSize, numberOfPlayers)){
-            console.log(boardSize);
-            self.settings = new Settings(parseInt(boardSize), parseInt(numberOfPlayers));
-
-            self.output.hideSettings();
-            self.output.showBoard();
-            self.createEngine(self.settings);
-            self.engine.play();
+        self.init = function() {
+            self.output.showSettings();
+            self.initEvents();
+        };
+        self.initEvents = function() {
+            self.input.clearSettings(self.output.clearSettings);
+            self.input.startGame(self.startGame);
+        };
+        self.createEngine = function(settings) {
+            self.settings = settings;
+            self.board = new board(self.settings, self.input, self.output);
+            self.gameLogic = new gameLogic();
+            self.engine = new engine(self.output, self.board, self.gameLogic);
+        };
+        self.startGame = function(boardSize, numberOfPlayers) {
+            if (self.validateSettings(boardSize, numberOfPlayers)) {
+                self.settings = new settings(parseInt(boardSize), parseInt(numberOfPlayers));
+                self.output.hideSettings();
+                self.output.showBoard();
+                self.createEngine(self.settings);
+                self.engine.play();
+            }
+        };
+        self.validateSettings = function(numberOfPlayers, boardSize) {
+            return !isNaN(parseInt(numberOfPlayers)) && !isNaN(parseInt(boardSize));
         }
     };
-
-    self.validateSettings = function(numberOfPlayers, boardSize){
-        return !isNaN(parseInt(numberOfPlayers)) && !isNaN(parseInt(boardSize));
-    }
-}();
+});
