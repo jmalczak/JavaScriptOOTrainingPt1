@@ -18,9 +18,7 @@ define([], function() {
         self.checkWinnerInternal = function(cells, startFromX, startFromY, previousCount) {
             var height = cells.length;
             var width = cells[0].length;
-            console.log("start " + startFromX);
-            console.log("start Y " + startFromY);
-            console.log("previous " + previousCount);
+            
             if (previousCount == width) {
                 return true;
             } else if (startFromY >= height || startFromX >= width) {

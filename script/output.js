@@ -28,10 +28,8 @@ define(['jquery'], function($) {
                 }
             }
         };
-        self.drawCell = function(cell) {
-            var style = cell.isSelected ? "selected" : "notSelected";
-            var selectedValue = cell.isSelected ? "X" : "";
-            $("#board table tr[X='" + cell.y + "']").append("<td class=" + style + " x='" + x + "' y='" + y + "' >" + selectedValue + "</td>");
+        self.drawCell = function(cell) {        
+            $("#board table tr[X='" + cell.y + "']").append("<td x='" + x + "' y='" + y + "' >" + cell.character + "</td>");
         };
     };
 });

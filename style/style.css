@@ -5,14 +5,12 @@ td {
     border: 1px dotted black;
     width: 120px;
     height: 120px;
-}
-.center {
-    margin: auto;
-}
-.selected {
     color:  black;
     font-size: 100px;
     text-align: center;
+}
+.center {
+    margin: auto;
 }
 .notSelected {
     color: blue;

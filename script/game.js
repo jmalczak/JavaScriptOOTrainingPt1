@@ -1,9 +1,10 @@
-define(['input', 'output', 'settings', 'engine', 'board', 'gameLogic'], function(input, output, settings, engine, board, gameLogic) {
+define(['input', 'output', 'settings', 'player', 'engine', 'board', 'gameLogic'], function(input, output, settings, player, engine, board, gameLogic) {
     return function() {
         var self = this;
 
         self.input = new input();
         self.output = new output();
+        self.playerCharacters = ['X', 'O', 'Y', 'Z', 'A', 'B', 'W', 'F', 'E' ];
 
         self.init = function() {
             self.output.showSettings();
@@ -15,9 +16,7 @@ define(['input', 'output', 'settings', 'engine', 'board', 'gameLogic'], function
         };
         self.createEngine = function(settings) {
             self.settings = settings;
-            self.board = new board(self.settings, self.input, self.output);
-            self.gameLogic = new gameLogic();
-            self.engine = new engine(self.output, self.board, self.gameLogic);
+            self.engine = new engine(new board(self.settings), self.createPlayers(settings.numberOfPlayers));
         };
         self.startGame = function(boardSize, numberOfPlayers) {
             if (self.validateSettings(boardSize, numberOfPlayers)) {
@@ -27,6 +26,16 @@ define(['input', 'output', 'settings', 'engine', 'board', 'gameLogic'], function
                 self.createEngine(self.settings);
                 self.engine.play();
             }
+        };
+        self.createPlayers = function(numberOfPlayers){
+            var players = []
+            
+            for(i = 0; i < numberOfPlayers; i++){            
+                players.push(new player('empty name', self.playerCharacters[i]))
+            }
+
+            console.log(players);
+            return players;
         };
         self.validateSettings = function(numberOfPlayers, boardSize) {
             return !isNaN(parseInt(numberOfPlayers)) && !isNaN(parseInt(boardSize));

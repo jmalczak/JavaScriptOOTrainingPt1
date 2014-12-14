@@ -1,17 +1,19 @@
-define(['cell'], function(cell) {
-    return function(settings, input, output) {
+define(['cell', 'input', 'output'], function(cell, input, output) {
+    return function(settings) {
+
         var self = this;
         self.settings = settings;
-        self.input = input;
-        self.output = output;
+        self.input = new input();
+        self.output = new output();
         self.cells = [];
+
         self.init = function() {
             for (size = 0; size < self.settings.boardSize; size++) {
                 self.cells[size] = new Array(self.settings.boardSize);
             }
             for (x = 0; x < self.settings.boardSize; x++) {
                 for (y = 0; y < self.settings.boardSize; y++) {
-                    self.cells[y][x] = new cell(x, y, false);
+                    self.cells[y][x] = new cell(x, y, "");
                 }
             }
         };
@@ -19,10 +21,10 @@ define(['cell'], function(cell) {
             return self.cells;
         };
         self.nextMove = function(onCompleted) {
-            input.readMove(onCompleted);
+            self.input.readMove(onCompleted);
         };
-        self.moveTo = function(x, y) {
-            self.cells[x][y].isSelected = true;
+        self.moveTo = function(x, y, player) {
+            self.cells[x][y].character = player.character;
         }
         self.draw = function() {
             self.output.drawBoard(self.cells);

@@ -1,8 +1,8 @@
 define([], function() {
-    return function(x, y, isSelected) {
+    return function(x, y, character) {
         var self = this;
         self.x = x;
         self.y = y;
-        self.isSelected = isSelected;
+        self.character = character;
     };
 });
