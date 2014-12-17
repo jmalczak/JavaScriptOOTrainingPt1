@@ -22,8 +22,10 @@ define(['output', 'gameLogic'], function(output, gameLogic) {
             self.currentPlayer++;
             
             board.draw();
-            if (self.gameLogic.checkWinner(board.getCells())) {
-                alert("Winner");
+            var winner = self.gameLogic.checkWinner(board.getCells());
+
+            if (winner != null) {
+                alert("Winner " + winner);
             } else {
                 self.move();
             }

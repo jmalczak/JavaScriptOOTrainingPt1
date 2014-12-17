@@ -34,7 +34,6 @@ define(['input', 'output', 'settings', 'player', 'engine', 'board', 'gameLogic']
                 players.push(new player('empty name', self.playerCharacters[i]))
             }
 
-            console.log(players);
             return players;
         };
         self.validateSettings = function(numberOfPlayers, boardSize) {

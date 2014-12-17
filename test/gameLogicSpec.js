@@ -25,5 +25,13 @@ define(['gameLogic', 'cell'], function(gameLogic, cell) {
             var winner = logic.checkWinner(cells);
             winner.should.be.exactly('x');
         });
+        it('should find winner in diag 2', function() {
+            var cells = [
+                [new cell(0, 0, 's'), new cell(0, 1, 'x')],
+                [new cell(1, 0, 'x'), new cell(1, 1, 'z')]
+            ];
+            var winner = logic.checkWinner(cells);
+            winner.should.be.exactly('x');
+        });
     });
 });

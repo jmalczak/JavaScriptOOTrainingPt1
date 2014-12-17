@@ -2,6 +2,7 @@ define([], function() {
     return function() {
         var self = this;
         self.checkWinner = function(cells) {
+            console.log(cells);
             var size = cells.length;
             var rows = [];
             var cols = [];
@@ -10,11 +11,12 @@ define([], function() {
             for (x = 0; x < size; x++) {
                 for (y = 0; y < size; y++) {
 
-                    dump(x);
-                    dump(y);
-                    dump(cell[x][y].character);
-
                     var cell = cells[x][y];
+
+                    if(cell.character == ""){
+                        continue;
+                    }
+
                     if (rows[x] == undefined || rows[x][cell.character] == undefined) {
                         var counter = {};
                         counter[cell.character] = 1;
@@ -30,26 +32,28 @@ define([], function() {
                         cols[y][cell.character]++;
                     }
                     if (x == y) {
-                        if (diag1[x] == undefined) {
+
+                        if (diag1[0] == undefined) {
                             var counter = {};
                             counter[cell.character] = 1;
-                            diag1[x] = counter;
+                            diag1[0] = counter;
                         } else {
-                            diag1[x]++;
+                            diag1[0][cell.character]++;
                         }
-                        if (diag1[x][cell.character] == size) {
+                        if (diag1[0][cell.character] == size) {
                             return cell.character;
                         }
                     }
-                    if (x + y == size) {
-                        if (diag2[x] == undefined) {
+                    if (x + y == size -1) {
+
+                        if (diag2[0] == undefined) {
                             var counter = {};
                             counter[cell.character] = 1;
-                            diag2[x] = counter;
+                            diag2[0] = counter;
                         } else {
-                            diag2[x]++;
+                            diag2[0][cell.character]++;
                         }
-                        if (diag2[x][cell.character] == size) {
+                        if (diag2[0][cell.character] == size) {
                             return cell.character;
                         }
                     }
@@ -61,8 +65,6 @@ define([], function() {
                     }
                 }
             };
-
-            dump(diag2);
 
             return null;
         };
