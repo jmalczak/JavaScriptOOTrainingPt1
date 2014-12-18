@@ -1,24 +1,13 @@
 define(['cell', 'input', 'output', 'utils'], function(cell, input, output, utils) {
     return function(settings) {
-
         var self = this;
         self.settings = settings;
         self.input = new input();
         self.output = new output();
-        self.cells = utils.createTwoDimensionalMatrix(2, 2, 0);
-
-        console.log();
-
-        self.init = function() {
-            for (size = 0; size < self.settings.boardSize; size++) {
-                self.cells[size] = new Array(self.settings.boardSize);
-            }
-            for (x = 0; x < self.settings.boardSize; x++) {
-                for (y = 0; y < self.settings.boardSize; y++) {
-                    self.cells[y][x] = new cell(x, y, "");
-                }
-            }
-        };
+        self.cells = utils.createTwoDimensionalMatrix(self.settings.boardSize, self.settings.boardSize, function() {
+            return new cell();
+        });
+        console.log(self.cells);
         self.getCells = function() {
             return self.cells;
         };

@@ -3,32 +3,32 @@ define(['gameLogic', 'cell'], function(gameLogic, cell) {
         var logic = new gameLogic();
         it('should find winner in one row', function() {
             var cells = [
-                [new cell(0, 0, 'a'), new cell(0, 1, 'a')],
-                [new cell(1, 0, 'v'), new cell(1, 1, 'd')]
+                [new cell('a'), new cell('a')],
+                [new cell('v'), new cell('d')]
             ];
             var winner = logic.checkWinner(cells);
             winner.should.be.exactly('a');
         });
         it('should find winner in one column', function() {
             var cells = [
-                [new cell(0, 0, 'x'), new cell(0, 1, 'v')],
-                [new cell(1, 0, 'x'), new cell(1, 1, '')]
+                [new cell('x'), new cell('v')],
+                [new cell('x'), new cell()]
             ];
             var winner = logic.checkWinner(cells);
             winner.should.be.exactly('x');
         });
         it('should find winner in diag 1', function() {
             var cells = [
-                [new cell(0, 0, 'x'), new cell(0, 1, 'v')],
-                [new cell(1, 0, 's'), new cell(1, 1, 'x')]
+                [new cell('x'), new cell('v')],
+                [new cell('s'), new cell('x')]
             ];
             var winner = logic.checkWinner(cells);
             winner.should.be.exactly('x');
         });
         it('should find winner in diag 2', function() {
             var cells = [
-                [new cell(0, 0, 's'), new cell(0, 1, 'x')],
-                [new cell(1, 0, 'x'), new cell(1, 1, 'z')]
+                [new cell('s'), new cell('x')],
+                [new cell('x'), new cell('z')]
             ];
             var winner = logic.checkWinner(cells);
             winner.should.be.exactly('x');

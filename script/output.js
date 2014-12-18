@@ -4,6 +4,9 @@ define(['jquery'], function($) {
         self.showBoard = function() {
             $("#board").show();
         };
+        self.hideBoard = function() {
+            $("#board").hide();
+        };
         self.showSettings = function() {
             $("#settings").show();
         };
@@ -19,17 +22,17 @@ define(['jquery'], function($) {
         };
         self.drawBoard = function(cells) {
             self.clearBoard();
-            height = cells.length;
-            width = cells[0].length;
-            for (x = 0; x < width; x++) {
+            var size = cells.length;
+            for (x = 0; x < size; x++) {
                 $("#board table").append("<tr x='" + x + "'></tr>")
-                for (y = 0; y < height; y++) {
-                    self.drawCell(cells[x][y])
+                for (y = 0; y < size; y++) {
+                    self.drawCell(cells[x][y], x, y);
                 }
             }
         };
-        self.drawCell = function(cell) {        
-            $("#board table tr[X='" + cell.y + "']").append("<td x='" + x + "' y='" + y + "' >" + cell.character + "</td>");
+        self.drawCell = function(cell, x, y) {
+            console.log(cell);
+            $("#board table tr[X='" + x + "']").append("<td x='" + x + "' y='" + y + "' >" + cell.character + "</td>");
         };
     };
 });
