@@ -1,12 +1,11 @@
 define(['input', 'output', 'settings', 'player', 'engine', 'board', 'gameLogic'], function(input, output, settings, player, engine, board, gameLogic) {
     return function() {
         var self = this;
-
         self.input = new input();
         self.output = new output();
-        self.playerCharacters = ['X', 'O', 'Y', 'Z', 'A', 'B', 'W', 'F', 'E' ];
-
+        self.playerCharacters = ['X', 'O', 'Y', 'Z', 'A', 'B', 'W', 'F', 'E'];
         self.init = function() {
+            self.output.hideBoard();
             self.output.showSettings();
             self.initEvents();
         };
@@ -16,7 +15,7 @@ define(['input', 'output', 'settings', 'player', 'engine', 'board', 'gameLogic']
         };
         self.createEngine = function(settings) {
             self.settings = settings;
-            self.engine = new engine(new board(self.settings), self.createPlayers(settings.numberOfPlayers));
+            self.engine = new engine(new board(self.settings), self.createPlayers(settings.numberOfPlayers), self.winnerCallback);
         };
         self.startGame = function(boardSize, numberOfPlayers) {
             if (self.validateSettings(boardSize, numberOfPlayers)) {
@@ -27,17 +26,25 @@ define(['input', 'output', 'settings', 'player', 'engine', 'board', 'gameLogic']
                 self.engine.play();
             }
         };
-        self.createPlayers = function(numberOfPlayers){
+        self.createPlayers = function(numberOfPlayers) {
             var players = []
-            
-            for(i = 0; i < numberOfPlayers; i++){            
+            for (i = 0; i < numberOfPlayers; i++) {
                 players.push(new player('empty name', self.playerCharacters[i]))
             }
-
             return players;
         };
         self.validateSettings = function(numberOfPlayers, boardSize) {
             return !isNaN(parseInt(numberOfPlayers)) && !isNaN(parseInt(boardSize));
         }
+        self.winnerCallback = function(winner) {
+            alert("Winner " + winner);
+            if (confirm("Play again?")) {
+                self.createEngine(self.settings);
+                self.engine.play();
+            }
+            else{
+                self.init();
+            }
+        };
     };
 });

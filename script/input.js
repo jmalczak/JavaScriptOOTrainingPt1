@@ -21,6 +21,7 @@ define(['jquery'], function($) {
             $("td").click(function() {
                 var x = parseInt($(this).attr("x"));
                 var y = parseInt($(this).attr("y"));
+
                 if (x != undefined && y != undefined) {
                     onCompleted(x, y);
                 }

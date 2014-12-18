@@ -1,8 +1,11 @@
-define([], function() {
-    return function(x, y, character) {
+define(['consts'], function(consts) {
+    return function(character) {
         var self = this;
-        self.x = x;
-        self.y = y;
-        self.character = character;
+
+        if(character === undefined){
+            self.character = consts.EMPTY_CELL;
+        }else{
+            self.character = character;
+        }
     };
 });
