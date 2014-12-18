@@ -1,11 +1,13 @@
-define(['cell', 'input', 'output'], function(cell, input, output) {
+define(['cell', 'input', 'output', 'utils'], function(cell, input, output, utils) {
     return function(settings) {
 
         var self = this;
         self.settings = settings;
         self.input = new input();
         self.output = new output();
-        self.cells = [];
+        self.cells = utils.createTwoDimensionalMatrix(2, 2, 0);
+
+        console.log();
 
         self.init = function() {
             for (size = 0; size < self.settings.boardSize; size++) {

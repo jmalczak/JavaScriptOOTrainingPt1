@@ -33,7 +33,7 @@ define(['input', 'output', 'settings', 'player', 'engine', 'board', 'gameLogic']
             for(i = 0; i < numberOfPlayers; i++){            
                 players.push(new player('empty name', self.playerCharacters[i]))
             }
-
+            
             return players;
         };
         self.validateSettings = function(numberOfPlayers, boardSize) {
